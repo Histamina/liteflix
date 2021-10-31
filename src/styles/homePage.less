@@ -131,22 +131,47 @@
             border-radius: 4px;
             .ant-card-body {
                padding: 0;
-               .info-wrapper {
-                  height: 100%;
-                  p {
-                     font-size: 16px;
-                     line-height: 16px;
-                     letter-spacing: 4px;
-                     text-align: center;
-                     color: @white-color;
-                     margin-bottom: 14px;
-                     font-weight: 100;
+
+               .card-content, .card-content-show {
+                  .info-wrapper, .info-wrapper-hover {
+                     height: 100%;
+                     padding: 16px;
+                     p {
+                        font-size: 16px;
+                        line-height: 16px;
+                        letter-spacing: 4px;
+                        text-align: center;
+                        color: @white-color;
+                        font-weight: 400;
+                     }
+                     &__icon, &__title {
+                        display: flex;
+                        justify-content: center;
+                        align-items: flex-end;
+                        color: @white-color;
+                        p {
+                           margin-bottom: 0;
+                        }
+                        svg {
+                           margin-right: 5px;
+                           letter-spacing: 4px;
+                           margin-bottom: 0;
+                           &.play-icon:hover {
+                              fill: @black-color;
+                              border: 1px solid @black-color;
+                              border-radius: 30px;
+                              circle {
+                                 fill: @primary-color;
+                              }
+
+                           }
+                        }
+                     }
                   }
-                  &__icon, &__title {
-                     display: flex;
-                     justify-content: center;
-                     align-items: flex-end;
-                  }
+                  
+               }
+               .card-content.hide, .card-content-show.hide {
+                  display: none;
                }
             }
          }
