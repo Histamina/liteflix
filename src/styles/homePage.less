@@ -47,56 +47,134 @@
    }
 }
 
-.about-movie-wrapper {
+.main-wrapper {
+   width: 90vw;
    position: absolute;
+   top: 160px;
    bottom: 0;
-   
-   h1 {
-      font-family: @primary-text;
-      font-weight: 400;
-      font-size: 20px;
-      line-height: 24px;
-      letter-spacing: 4px;
-      color: @white-color;
-      strong {
-         font-weight: 700;
-      }
-   }
-   h2 {
-      font-family: @primary-text;
-      font-weight: 700;
-      font-size: 120px;
-      line-height: 100px;
-      letter-spacing: 16px;
-      color: @primary-color;
-      margin-bottom: 8px;
-   }
 
-   &__buttons {
-      margin-bottom: 160px;
-      .ant-btn {
-         &.play-button {
-            background-color: @black-color;
-            border: @black-color;
-            height: 56px;
-            font-size: 18px;
-            line-height: 21.6px;
-            letter-spacing: 4px;
-            svg {
-               margin-right: 14px;
-            }
-            &:hover {
-               background-color: lighten(@black-color, 30);
-            }
-            &.my-list {
-               background-color: rgba(36, 36, 36, 0.5);
-               border: 1px solid rgba(255, 255, 255, 0.5);
+   &__about-movie {
+      h1 {
+         font-family: @primary-text;
+         font-weight: 400;
+         font-size: 20px;
+         line-height: 24px;
+         letter-spacing: 4px;
+         color: @white-color;
+         strong {
+            font-weight: 700;
+         }
+      }
+      h2 {
+         font-family: @primary-text;
+         font-weight: 700;
+         font-size: 120px;
+         line-height: 100px;
+         letter-spacing: 16px;
+         color: @primary-color;
+         margin-bottom: 8px;
+      }
+   
+      .about-movie__buttons {
+         margin-bottom: 160px;
+         .ant-btn {
+            &.play-button {
+               background-color: @black-color;
+               border: @black-color;
+               height: 56px;
+               font-size: 18px;
+               line-height: 21.6px;
+               letter-spacing: 4px;
+               svg {
+                  margin-right: 14px;
+               }
                &:hover {
-                  background-color: lighten(rgba(36, 36, 36, 0.5), 30);
-                  border-color: darken(rgba(255, 255, 255, 0.5), 40);
+                  background-color: lighten(@black-color, 30);
+               }
+               &.my-list {
+                  background-color: rgba(36, 36, 36, 0.5);
+                  border: 1px solid rgba(255, 255, 255, 0.5);
+                  &:hover {
+                     background-color: lighten(rgba(36, 36, 36, 0.5), 30);
+                     border-color: darken(rgba(255, 255, 255, 0.5), 40);
+                  }
                }
             }
          }
       }
+   }
+
+   &__movie-sider {
+      .movie-sider__title {
+         p {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 18px;
+            letter-spacing: 4px;
+            text-align: center;
+            color: @white-color;
+            cursor: pointer;
+            strong {
+               font-weight: 700;
+               margin-left: 5px;
+            }
+         }
+         svg {
+            margin-left: 10px;
+            margin-bottom: 3px;
+         }
+      }
+      .movie-sider__content {
+         .ant-card.popular-card {
+            height: 146px;
+            border: 1px solid rgba(53, 53, 53, 0.6);
+            border-radius: 4px;
+            .ant-card-body {
+               padding: 0;
+               .info-wrapper {
+                  height: 100%;
+                  p {
+                     font-size: 16px;
+                     line-height: 16px;
+                     letter-spacing: 4px;
+                     text-align: center;
+                     color: @white-color;
+                     margin-bottom: 14px;
+                     font-weight: 100;
+                  }
+                  &__icon, &__title {
+                     display: flex;
+                     justify-content: center;
+                     align-items: flex-end;
+                  }
+               }
+            }
+         }
+      }
+   }
+}
+
+.drop-down-wrapper {
+   background-color: @black-color;
+   padding: 24px;
+   width: 240px;
+   p {
+      font-size: 16px;
+      line-height: 16px;
+      letter-spacing: 4px;
+      color: @white-color !important;
+      font-weight: 400;
+      margin-bottom: 0;
+      cursor: pointer;
+      &.bold-text {
+         font-weight: 700;
+      }
+   }
+   svg {
+      margin-bottom: 5px;
+   }
+
+   .popular-wrapper {
+      margin-bottom: 16px;
    }
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState, Fragment } from 'react';
 import { Row, Col, Spin } from 'antd';
-import MainBackground from '../images/MainBackground.png';
 import Navbar from './components/Navbar';
 import AboutMovie from './components/AboutMovie';
 import MovieSider from './components/MovieSider';
@@ -14,14 +13,16 @@ const HomePage = () => {
    const fetchFeatured = async () => {
       setLoading(true);
       const response = await homeService.getFeaturedLiteflix();
-      setFeaturedLiteflix(response);
+      setFeaturedLiteflix(response.results[1]);
       setLoading(false);
    };
 
    const fetchPopularMovies = async () => {
       setLoading(true);
       const response = await homeService.getPopularMovies();
-      setPopularMovies(response.results);
+      const allMovies = response.results;
+      const firstFourOf = allMovies.slice(0, 4);
+      setPopularMovies(firstFourOf);
       setLoading(false);
    };
 
@@ -29,10 +30,6 @@ const HomePage = () => {
       fetchFeatured();
       fetchPopularMovies();
    }, []);
-
-   if (featuredLiteflix) {
-      console.log(featuredLiteflix)
-   }
 
    if(popularMovies){
       console.log(popularMovies)
@@ -42,14 +39,14 @@ const HomePage = () => {
       <Row justify="center">
          {
             loading ?
-            <Spin style={{ display: 'flex', justifyContent: 'center', marginTop: '30vh' }} />
+            <Spin style={{ display: 'flex', justifyContent: 'center', marginTop: '50vh' }} />
             :
             <Fragment>
                {
                   popularMovies && featuredLiteflix && 
                   <Col lg={24}
                      style={{
-                        backgroundImage: `url('${MainBackground}')`,
+                        backgroundImage: `url('https://image.tmdb.org/t/p/original${featuredLiteflix.backdrop_path}')`,
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
                         height: '140vh',
@@ -60,8 +57,8 @@ const HomePage = () => {
                      }}
                   >
                      <Navbar />
-                     <Row justify="center">
-                        <AboutMovie />
+                     <Row justify="space-between" className="main-wrapper">
+                        <AboutMovie featuredLiteflix={featuredLiteflix} />
                         <MovieSider popularMovies={popularMovies} />
                      </Row>
                   </Col>
