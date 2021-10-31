@@ -6,7 +6,7 @@ import ProfilePicture from '../../images/ProfilePicture.png';
 
 const { Header } = Layout;
 
-const Navbar = () => {
+const Navbar = ({ showModal }) => {
    return (
       <Header className="header-wrapper">
          <Link to='/'>
@@ -14,12 +14,10 @@ const Navbar = () => {
                <img src={LiteflixLogo} width="153" height="34" alt="Liteflix logo" />
             </div>
          </Link>
-         <Link>
-            <Button type="primary" size="large">
-               <img src={IconPlus} width="14" height="14" />
-               Agregar película
-            </Button>
-         </Link>
+         <Button onClick={showModal} type="primary" size="large">
+            <img src={IconPlus} width="14" height="14" />
+            Agregar película
+         </Button>
          <Menu>
             <Menu.Item key="1">
                <svg width="27" height="14" viewBox="0 0 27 14" fill="none" xmlns="http://www.w3.org/2000/svg">

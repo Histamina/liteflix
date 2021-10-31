@@ -4,11 +4,13 @@ import Navbar from './components/Navbar';
 import AboutMovie from './components/AboutMovie';
 import MovieSider from './components/MovieSider';
 import homeService from '../services/homeService';
+import AddMovieModal from './components/AddMovieModal';
 
 const HomePage = () => {
    const [loading, setLoading] = useState(false);
    const [featuredLiteflix, setFeaturedLiteflix] = useState();
    const [popularMovies, setPopularMovies] = useState();
+   const [isModalVisible, setIsModalVisible] = useState(false);
 
    const fetchFeatured = async () => {
       setLoading(true);
@@ -30,6 +32,14 @@ const HomePage = () => {
       fetchFeatured();
       fetchPopularMovies();
    }, []);
+
+   const showModal = () => {
+      setIsModalVisible(true);
+   };
+
+   const closeModal = () => {
+      setIsModalVisible(false);
+   };
 
    if(popularMovies){
       console.log(popularMovies)
@@ -56,13 +66,15 @@ const HomePage = () => {
                         justifyContent: 'center'
                      }}
                   >
-                     <Navbar />
+                     <Navbar showModal={showModal} />
                      <Row justify="space-between" className="main-wrapper">
                         <AboutMovie featuredLiteflix={featuredLiteflix} />
                         <MovieSider popularMovies={popularMovies} />
                      </Row>
                   </Col>
                }
+
+               <AddMovieModal isModalVisible={isModalVisible} closeModal={closeModal} />
             </Fragment>
          }
       </Row>
