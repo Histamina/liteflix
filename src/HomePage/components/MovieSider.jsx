@@ -105,7 +105,7 @@ const MovieSider = ({ popularMovies }) => {
                   dropDownSelected === popularMovies &&
                      popularMovies.map((movie, index) => {
                         return (
-                           <Col>
+                           <Col key={index}>
                               <Card hoverable className="popular-card">
                                  <Row
                                     justify="center"
@@ -126,7 +126,7 @@ const MovieSider = ({ popularMovies }) => {
                                           <Col className="info-wrapper__icon">
                                              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <circle cx="20" cy="20" r="19.5" stroke="white"/>
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M26.6484 20.2701L16 13V27L26.6484 20.2701Z" stroke="white"/>
+                                                <path fillRule="evenodd" clipRule="evenodd" d="M26.6484 20.2701L16 13V27L26.6484 20.2701Z" stroke="white"/>
                                              </svg>
                                           </Col>
                                           <Col lg={24} className="info-wrapper__title">
@@ -157,7 +157,7 @@ const MovieSider = ({ popularMovies }) => {
                                                 <Col lg={3}>
                                                    <svg className="play-icon" width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                       <circle cx="20" cy="20" r="19.5" stroke="white"/>
-                                                      <path fill-rule="evenodd" clip-rule="evenodd" d="M26.6484 20.2701L16 13V27L26.6484 20.2701Z" stroke="white"/>
+                                                      <path fillRule="evenodd" clipRule="evenodd" d="M26.6484 20.2701L16 13V27L26.6484 20.2701Z" stroke="white"/>
                                                    </svg>
                                                 </Col>
                                                 <Col lg={21} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>

@@ -18,7 +18,7 @@ const AboutMovie = ({ featuredLiteflix }) => {
                   <Col lg={7}>
                      <Button className="play-button" type="primary" size="large" block>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                           <path fill-rule="evenodd" clip-rule="evenodd" d="M13.6484 8.27005L3 1V15L13.6484 8.27005Z" stroke="white"/>
+                           <path fillRule="evenodd" clipRule="evenodd" d="M13.6484 8.27005L3 1V15L13.6484 8.27005Z" stroke="white"/>
                         </svg>
                         Reproducir
                      </Button>
