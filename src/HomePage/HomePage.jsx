@@ -5,12 +5,18 @@ import AboutMovie from './components/AboutMovie';
 import MovieSider from './components/MovieSider';
 import homeService from '../services/homeService';
 import AddMovieModal from './components/AddMovieModal';
+import helpers from '../helpers';
 
 const HomePage = () => {
    const [loading, setLoading] = useState(false);
    const [featuredLiteflix, setFeaturedLiteflix] = useState();
    const [popularMovies, setPopularMovies] = useState();
    const [isModalVisible, setIsModalVisible] = useState(false);
+   const [userMovies, setUserMovies] = useState(
+      JSON.parse(localStorage.getItem("userMovies")) !== null &&
+      JSON.parse(localStorage.getItem("userMovies"))
+   );
+   const [refresh, setRefresh] = useState();
 
    const fetchFeatured = async () => {
       setLoading(true);
@@ -28,10 +34,19 @@ const HomePage = () => {
       setLoading(false);
    };
 
+   const checkMovies = (data) => {
+      helpers.addMovies(data)
+   };
+
+   if (userMovies) {
+      console.log(userMovies)
+   }
+
    useEffect(() => {
       fetchFeatured();
       fetchPopularMovies();
-   }, []);
+      checkMovies(userMovies)
+   }, [refresh]);
 
    const showModal = () => {
       setIsModalVisible(true);
@@ -74,7 +89,7 @@ const HomePage = () => {
                   </Col>
                }
 
-               <AddMovieModal isModalVisible={isModalVisible} closeModal={closeModal} />
+               <AddMovieModal isModalVisible={isModalVisible} closeModal={closeModal} setRefresh={setRefresh} />
             </Fragment>
          }
       </Row>

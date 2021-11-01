@@ -250,6 +250,22 @@
                color: @white-color;
                margin-right: 16px;
             }
+            .ant-upload-list.ant-upload-list-text {
+               display: none;
+            }
+            .progress-bar-wrapper {
+               width: 100%;
+               .ant-progress-inner {
+                  border-radius: 0;
+                  background-color: @black-color;
+                  height: 10px;
+                  .ant-progress-bg {
+                     background-color: @primary-color;
+                     border-radius: inherit;
+                     height: 10px !important;
+                  }
+               }
+            }
          }
          .ant-input {
             border-top: none;
@@ -273,8 +289,12 @@
             letter-spacing: 4px;
             color: @black-color;
             height: 48px;
-            background-color: @gray-color;
-            border-color: @gray-color;
+            background-color: @white-color;
+            border-color: @white-color;
+            &.disabled-button {
+               background-color: @gray-color;
+               border-color: @gray-color;
+            }
          }
       }
    }
