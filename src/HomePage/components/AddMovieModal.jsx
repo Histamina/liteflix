@@ -9,6 +9,15 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
    const [ready, setReady] = useState(false)
    const [form] = Form.useForm();
 
+   const normFile = (event) => {
+      setLoadingImage(event);
+   };
+
+   const handleFileValue = (value) => {
+      setLoadingImage(value);
+      setHidePercentageBar(false);
+   };
+
 
    const onFinish = async (values) => {
       const params = {
@@ -21,22 +30,15 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
       form.resetFields();
    };
 
-   const normFile = (event) => {
-      setLoadingImage(event);
-   };
 
-   if (loadingImage) {
-      console.log(loadingImage)
+   if (movieTitle) {
+      console.log(movieTitle)
    }
 
    if (hidePercentageBar) {
       console.log(hidePercentageBar)
    }
 
-   const handleFileValue = (value) => {
-      setLoadingImage(value);
-      setHidePercentageBar(false);
-   };
 
    const percentStatus = () => {
       console.log('porcentaje')
@@ -124,45 +126,53 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                                           {
                                              loadingImage.file.status === 'uploading' &&
                                                 <Col>
-                                                   <p>Cargando <strong>{percentStatus()}%</strong></p>
+                                                   <p className="mb-15">Cargando <strong>{percentStatus()}%</strong></p>
                                                 </Col>
                                           }
                                           {
                                              loadingImage.file.status === 'done' &&
                                                 <Col>
-                                                   <p><strong>100% cargado</strong></p>
+                                                   <p className="mb-15"><strong>100% cargado</strong></p>
                                                 </Col>
                                           }
                                           {
                                              loadingImage.file.status === 'error' &&
                                              <Col>
-                                                <p><strong>¡Error!</strong> no se pudo cargar la película</p>
+                                                <p className="mb-15"><strong>¡Error!</strong> no se pudo cargar la película</p>
                                              </Col>
                                           }
                                        </Row>
                                     </Col>
                                     <Col lg={24}>
-                                       <Progress percent={percentStatus()} showInfo={false} />
+                                       <Progress
+                                          percent={percentStatus()}
+                                          showInfo={false}
+                                          className={loadingImage.file.status === 'error' && 'error-bar'}
+                                       />
                                     </Col>
                                     <Col lg={24}>
                                        <Row justify="end">
                                        {
                                           loadingImage.file.status === 'uploading' &&
-                                             <Col>
-                                                <Button onClick={cancelLoadImage}>
+                                             <Col className="mt-20">
+                                                <Button
+                                                   className="cancel-upload-button"
+                                                   type="primary"
+                                                   onClick={cancelLoadImage}
+                                                >
                                                    Cancelar
                                                 </Button>
                                              </Col>
                                        }
                                        {
                                           loadingImage.file.status === 'done' &&
-                                             <Col>
-                                                <p>¡Listo!</p>
+                                             <Col className="mt-15">
+                                                <p className="success-text">¡Listo!</p>
                                              </Col>
                                        }
                                        {
                                           loadingImage.file.status === 'error' &&
-                                             <Col>
+                                             <Col className="mt-15">
                                                 <Button onClick={cancelLoadImage}>
                                                    Reintentar
                                                 </Button>
@@ -175,7 +185,7 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                                  null
                               }
                         </Row>
-                        <Row justify="center" style={{ marginTop: 80}}>
+                        <Row justify="center" style={{ marginTop: 48 }}>
                            <Col lg={10}>
                               <Form.Item
                                  name="original_title"
@@ -195,8 +205,12 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                                  htmlType="submit"
                                  type="primary"
                                  block
-                                 disabled={loadingImage === 'uploading' || loadingImage === 'error' || !movieTitle}
-                                 className={`${(loadingImage === 'uploading' || loadingImage === 'error' || !movieTitle) && 'disabled-button'}`}
+                                 disabled={
+                                    !movieTitle || (loadingImage && loadingImage.file.status === 'uploading') ||
+                                    (loadingImage && loadingImage.file.status === 'error') || !loadingImage
+                                 }
+                                 className={`${(!movieTitle || (loadingImage && loadingImage.file.status === 'uploading') ||
+                                 (loadingImage && loadingImage.file.status === 'error') || !loadingImage) && 'disabled-button'}`}
                               >
                                  Subir película
                               </Button>
@@ -207,12 +221,28 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                </Fragment>
                :
                <Fragment>
-                  <p>
-                     ya esta
-                  </p>
-                  <Button onClick={goHome}>
-                     ir al home
-                  </Button>
+                  <Col lg={24} className="upload-success-wrapper">
+                     <Row justify="center" gutter={[0, 24]}>
+                        <Col lg={24}>
+                           <h3><strong>Lite</strong>flix</h3>
+                        </Col>            
+                        <Col lg={24}>
+                           <p><strong>¡Felicitaciones!</strong></p>
+                        </Col>            
+                        <Col lg={24}>
+                           <p className="movie-title">{movieTitle} fue correctamente subida.</p>
+                        </Col>            
+                        <Col lg={8}>
+                           <Button
+                              type="primary"
+                              onClick={goHome}
+                              block
+                           >
+                              Ir al home
+                           </Button>
+                        </Col>
+                     </Row>
+                  </Col>
                </Fragment>
             }
          </Row>
