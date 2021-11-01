@@ -218,6 +218,12 @@
          color: @primary-color;
          margin-bottom: 0;
       }
+      .close-icon-wrapper {
+         position: absolute;
+         top: 24px;
+         right: 24px;
+         cursor: pointer;
+      }
       .add-file-wrapper {
          border: 1px dashed @white-color;
          padding-top: 43px;
@@ -237,6 +243,33 @@
             fill: @white-color !important;
             color: @white-color;
             margin-right: 16px;
+         }
+      }
+      .form-wrapper {
+         .ant-input {
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 1px solid @gray-color;
+            box-shadow: none;
+            background-color: @black-color;
+            font-size: 16px ;
+            letter-spacing: 4px;
+            color: @white-color;
+            text-align: center;
+            &:placeholder-shown {
+               text-align: center;
+            }
+         }
+         .ant-btn {
+            font-size: 16px;
+            font-weight: 18px;
+            line-height: 21px;
+            letter-spacing: 4px;
+            color: @black-color;
+            height: 48px;
+            background-color: @gray-color;
+            border-color: @gray-color;
          }
       }
    }

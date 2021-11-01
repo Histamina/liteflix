@@ -9,6 +9,10 @@ const AddMovieModal = ({ isModalVisible, closeModal }) => {
       console.log(values)
    };
 
+   const handleDrop = (event) => {
+      console.log(event)
+   }
+
    return (
       <Modal
          visible={isModalVisible}
@@ -16,13 +20,24 @@ const AddMovieModal = ({ isModalVisible, closeModal }) => {
          centered={true}
          footer={false}
          width={730}
+         closable={false}
          className="add-movie-modal"
       >
          <Row justify="center" gutter={[0, 48]}>
+            <Col lg={24} className="close-icon-wrapper">
+               <Row justify="end">
+                  <Col onClick={closeModal}>
+                     <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.42892 1.42893L15.5711 15.5711" stroke="white" stroke-linecap="square"/>
+                        <path d="M1.42892 15.5711L15.5711 1.42893" stroke="white" stroke-linecap="square"/>
+                     </svg>
+                  </Col>
+               </Row>
+            </Col>
             <Col lg={10}>
                <h2>Agregar película</h2>
             </Col>
-            <Col lg={24} className="add-file-wrapper">
+            <Col lg={24} className="add-file-wrapper" onDrop={handleDrop}>
                <Row justify="center">
                   <Col>
                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,13 +50,9 @@ const AddMovieModal = ({ isModalVisible, closeModal }) => {
                   </Col>
                </Row>
             </Col>
-            <Col lg={10}>
-               <Form
-                  form={form}
-                  onFinish={onFinish}
-                  size="large"
-               >
-                  <Row justify="center">
+            <Col lg={10} className="form-wrapper">
+               <Form form={form} onFinish={onFinish} size="large">
+                  <Row justify="center" gutter={[0, 24]}>
                      <Col lg={24}>
                         <Form.Item
                            name="original_title"
@@ -54,7 +65,7 @@ const AddMovieModal = ({ isModalVisible, closeModal }) => {
                         </Form.Item>
                      </Col>
                      <Col lg={24}>
-                        <Button htmlType="submit" type="primary" block disabled>
+                        <Button htmlType="submit" type="primary" block>
                            Subir película
                         </Button>
                      </Col>
