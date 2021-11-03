@@ -5,67 +5,76 @@ import helpers from '../../helpers';
 const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
    const [loadingImage, setLoadingImage] = useState(false);
    const [hidePercentageBar, setHidePercentageBar] = useState(false);
+   const [percentValue, setPercentValue] = useState(1);
+   const [randomUpdateStatus, setRandomUpdateStatus] = useState();
    const [movieTitle, setMovieTitle] = useState();
    const [ready, setReady] = useState(false)
    const [form] = Form.useForm();
 
-   const normFile = (event) => {
-      setLoadingImage(event);
+   const imageToDataURL = (url, callback) => {
+      let xhr = new XMLHttpRequest();
+      xhr.onload = () => {
+         let reader = new FileReader();
+         reader.onloadend = () => {
+            callback(reader.result);
+         }
+         reader.readAsDataURL(xhr.response);
+      };
+      xhr.open('GET', url);
+      xhr.responseType = 'blob';
+      xhr.send();
    };
 
-   const handleFileValue = (value) => {
-      setLoadingImage(value);
+   const normFile = (event) => {
+      imageToDataURL(event, (dataUrl) => setLoadingImage(dataUrl));
+      percentStatus();
       setHidePercentageBar(false);
    };
 
-
-   const onFinish = async (values) => {
-      const params = {
-         movie_title: values.original_title,
-         movie_data: loadingImage
-      }
-      helpers.addMovies(params)
-      setReady(true)
-      setLoadingImage(false);
-      form.resetFields();
-   };
-
-
-   if (movieTitle) {
-      console.log(movieTitle)
+   if (loadingImage) {
+      console.log(loadingImage)
    }
-
-   if (hidePercentageBar) {
-      console.log(hidePercentageBar)
-   }
-
 
    const percentStatus = () => {
-      console.log('porcentaje')
-      let value;
-
-      if (loadingImage.file.status === 'uploading') {
-         for (let i = 1; i < 100 ; i++) {
-            return value = i;
+      setTimeout(() => {
+         for (let i = 1; i < 101 ; i++) {
+            setPercentValue(i);
          }
-      } else {
-         return value = 100;
-      }
+      }, 3000);
+
+      const randomBoolean = Math.random() < 0.7;
+      setRandomUpdateStatus(randomBoolean);
    };
+
+
 
    const cancelLoadImage = () => {
       setLoadingImage(false);
       setHidePercentageBar(true);
+      setPercentValue(1);
+      setRandomUpdateStatus();
    };
 
    const handleMovieTitle = (event) => {
       setMovieTitle(event.target.value);
    };
 
+   const onFinish = async (values) => {
+      const params = {
+         movie_title: values.original_title,
+         movie_data: loadingImage
+      }
+      helpers.addMovies(params);
+      // setReady(true);
+   };
+   
    const goHome = () => {
-      closeModal()
-      setRefresh(Math.random().toString(26))
-   }
+      setLoadingImage(false);
+      form.resetFields();
+      setRefresh(Math.random().toString('26'));
+      closeModal();
+   };
+
 
    return (
       <Modal
@@ -103,8 +112,11 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                               getValueFromEvent={normFile}
                               noStyle
                            >
-                              <Upload.Dragger name="files" action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                              onChange={handleFileValue} style={{display: `${(!loadingImage || hidePercentageBar )? 'flex' : 'none' }`}}>
+                              <Upload.Dragger
+                                 name="files"
+                                 style={{display: `${(!loadingImage || hidePercentageBar )? 'flex' : 'none' }`}}
+                                 customRequest={() => console.log('todo ok')}
+                              >
                                  <Row justify="center">
                                     <Col>
                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -124,19 +136,19 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                                     <Col lg={24}>
                                        <Row justify="start">
                                           {
-                                             loadingImage.file.status === 'uploading' &&
+                                             percentValue < 100 &&
                                                 <Col>
-                                                   <p className="mb-15">Cargando <strong>{percentStatus()}%</strong></p>
+                                                   <p className="mb-15">Cargando <strong>{percentValue}%</strong></p>
                                                 </Col>
                                           }
                                           {
-                                             loadingImage.file.status === 'done' &&
+                                             (percentValue === 100 && randomUpdateStatus) &&
                                                 <Col>
                                                    <p className="mb-15"><strong>100% cargado</strong></p>
                                                 </Col>
                                           }
                                           {
-                                             loadingImage.file.status === 'error' &&
+                                             (percentValue === 100 && !randomUpdateStatus) &&
                                              <Col>
                                                 <p className="mb-15"><strong>¡Error!</strong> no se pudo cargar la película</p>
                                              </Col>
@@ -145,15 +157,15 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                                     </Col>
                                     <Col lg={24}>
                                        <Progress
-                                          percent={percentStatus()}
+                                          percent={percentValue}
                                           showInfo={false}
-                                          className={loadingImage.file.status === 'error' && 'error-bar'}
+                                          className={!randomUpdateStatus && 'error-bar'}
                                        />
                                     </Col>
                                     <Col lg={24}>
                                        <Row justify="end">
                                        {
-                                          loadingImage.file.status === 'uploading' &&
+                                          percentValue < 100 &&
                                              <Col className="mt-20">
                                                 <Button
                                                    className="cancel-upload-button"
@@ -165,13 +177,13 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                                              </Col>
                                        }
                                        {
-                                          loadingImage.file.status === 'done' &&
+                                          (percentValue === 100 && randomUpdateStatus) &&
                                              <Col className="mt-15">
                                                 <p className="success-text">¡Listo!</p>
                                              </Col>
                                        }
                                        {
-                                          loadingImage.file.status === 'error' &&
+                                          (percentValue === 100 && !randomUpdateStatus) &&
                                              <Col className="mt-15">
                                                 <Button onClick={cancelLoadImage}>
                                                    Reintentar

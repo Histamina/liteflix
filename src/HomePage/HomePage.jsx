@@ -1,6 +1,6 @@
 import { useEffect, useState, Fragment } from 'react';
 import { Row, Col, Spin } from 'antd';
-import Navbar from './components/Navbar';
+import Navbar from '../components/Navbar';
 import AboutMovie from './components/AboutMovie';
 import MovieSider from './components/MovieSider';
 import homeService from '../services/homeService';
@@ -13,8 +13,8 @@ const HomePage = () => {
    const [popularMovies, setPopularMovies] = useState();
    const [isModalVisible, setIsModalVisible] = useState(false);
    const [userMovies, setUserMovies] = useState(
-      JSON.parse(localStorage.getItem("userMovies")) !== null &&
-      JSON.parse(localStorage.getItem("userMovies"))
+      JSON.parse(localStorage.getItem("userMovies")) !== null ?
+      JSON.parse(localStorage.getItem("userMovies")) : null
    );
    const [refresh, setRefresh] = useState();
 

@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Button, Layout, Menu } from 'antd';
-import LiteflixLogo from '../../images/LiteflixLogo.png';
-import IconPlus from '../../images/IconPlus.png';
-import ProfilePicture from '../../images/ProfilePicture.png';
+import LiteflixLogo from '../images/LiteflixLogo.png';
+import IconPlus from '../images/IconPlus.png';
+import ProfilePicture from '../images/ProfilePicture.png';
 
 const { Header } = Layout;
 
@@ -15,7 +15,7 @@ const Navbar = ({ showModal }) => {
             </div>
          </Link>
          <Button onClick={showModal} type="primary" size="large">
-            <img src={IconPlus} width="14" height="14" />
+            <img src={IconPlus} width="14" height="14" alt="Icon plus logo" />
             Agregar película
          </Button>
          <Menu>

@@ -1,0 +1,48 @@
+.ant-layout-header.header-wrapper {
+   background: transparent;
+   position: absolute;
+   top: 20px;
+   width: 90vw;
+   padding-left: 0;
+   padding-right: 0;
+   display: flex;
+   align-items: center;
+
+   .logo-wrapper {
+      display: flex;
+      align-items: center;
+      margin-right: 64px;
+   }
+
+   .ant-btn-primary {
+      img {
+         margin-right: 12px;
+      }
+      border: none;
+      background: transparent;
+      font-size: 18px;
+      line-height: 18px;
+      letter-spacing: 4px;
+      font-weight: bold;
+      box-shadow: none;
+   }
+
+   .ant-menu {
+      width: 100%;
+      float: right;
+      background: transparent;
+      border: none;
+      display: flex;
+      justify-content: flex-end;
+
+      &:not(.ant-menu-horizontal) .ant-menu-item-selected {
+         background: transparent;
+      }
+      .ant-menu-item {
+         margin-left: 15px;
+         &.bell-wrapper {
+            margin-top: 10px;
+         }
+      }
+   }
+}
