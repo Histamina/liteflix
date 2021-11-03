@@ -3,11 +3,10 @@ import { Row, Col, Form, Button, Modal, Input, Upload, Progress } from 'antd';
 import helpers from '../../helpers';
 
 const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
-   const [loadingImage, setLoadingImage] = useState(false);
-   const [hidePercentageBar, setHidePercentageBar] = useState(false);
+   const [loadingImage, setLoadingImage] = useState();
+   const [movieTitle, setMovieTitle] = useState();
    const [percentValue, setPercentValue] = useState(1);
    const [randomUpdateStatus, setRandomUpdateStatus] = useState();
-   const [movieTitle, setMovieTitle] = useState();
    const [ready, setReady] = useState(false)
    const [form] = Form.useForm();
 
@@ -28,12 +27,7 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
    const normFile = (event) => {
       imageToDataURL(event, (dataUrl) => setLoadingImage(dataUrl));
       percentStatus();
-      setHidePercentageBar(false);
    };
-
-   if (loadingImage) {
-      console.log(loadingImage)
-   }
 
    const percentStatus = () => {
       setTimeout(() => {
@@ -46,11 +40,8 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
       setRandomUpdateStatus(randomBoolean);
    };
 
-
-
    const cancelLoadImage = () => {
-      setLoadingImage(false);
-      setHidePercentageBar(true);
+      setLoadingImage();
       setPercentValue(1);
       setRandomUpdateStatus();
    };
@@ -65,11 +56,11 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
          movie_data: loadingImage
       }
       helpers.addMovies(params);
-      // setReady(true);
+      setReady(true);
    };
    
    const goHome = () => {
-      setLoadingImage(false);
+      setLoadingImage();
       form.resetFields();
       setRefresh(Math.random().toString('26'));
       closeModal();
@@ -114,7 +105,7 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                            >
                               <Upload.Dragger
                                  name="files"
-                                 style={{display: `${(!loadingImage || hidePercentageBar )? 'flex' : 'none' }`}}
+                                 style={{ display: `${!loadingImage ? 'flex' : 'none' }`}}
                                  customRequest={() => console.log('todo ok')}
                               >
                                  <Row justify="center">
@@ -131,7 +122,7 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                               </Upload.Dragger>
                            </Form.Item>
                               {
-                                 (loadingImage && !hidePercentageBar) ?
+                                 loadingImage ?
                                  <Row justify="center" className="progress-bar-wrapper">
                                     <Col lg={24}>
                                        <Row justify="start">
@@ -218,11 +209,9 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                                  type="primary"
                                  block
                                  disabled={
-                                    !movieTitle || (loadingImage && loadingImage.file.status === 'uploading') ||
-                                    (loadingImage && loadingImage.file.status === 'error') || !loadingImage
+                                    !movieTitle || !loadingImage || !randomUpdateStatus
                                  }
-                                 className={`${(!movieTitle || (loadingImage && loadingImage.file.status === 'uploading') ||
-                                 (loadingImage && loadingImage.file.status === 'error') || !loadingImage) && 'disabled-button'}`}
+                                 className={`${!movieTitle || !loadingImage || !randomUpdateStatus && 'disabled-button'}`}
                               >
                                  Subir película
                               </Button>
@@ -242,7 +231,7 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                            <p><strong>¡Felicitaciones!</strong></p>
                         </Col>            
                         <Col lg={24}>
-                           <p className="movie-title">{movieTitle} fue correctamente subida.</p>
+                           <p className="movie-title">{movieTitle} la película fue correctamente subida.</p>
                         </Col>            
                         <Col lg={8}>
                            <Button
