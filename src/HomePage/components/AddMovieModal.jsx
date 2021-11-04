@@ -2,6 +2,8 @@ import { Fragment, useState } from 'react';
 import { Row, Col, Form, Button, Modal, Input, Upload, Progress } from 'antd';
 import helpers from '../../helpers';
 
+const { Dragger } = Upload;
+
 const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
    const [loadingImage, setLoadingImage] = useState();
    const [movieTitle, setMovieTitle] = useState();
@@ -10,24 +12,25 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
    const [ready, setReady] = useState(false)
    const [form] = Form.useForm();
 
-   const imageToDataURL = (url, callback) => {
-      let xhr = new XMLHttpRequest();
-      xhr.onload = () => {
-         let reader = new FileReader();
-         reader.onloadend = () => {
-            callback(reader.result);
-         }
-         reader.readAsDataURL(xhr.response);
-      };
-      xhr.open('GET', url);
-      xhr.responseType = 'blob';
-      xhr.send();
-   };
+   const normFile = (info) => {
+      let fileList = info.fileList;
 
-   const normFile = (event) => {
-      imageToDataURL(event, (dataUrl) => setLoadingImage(dataUrl));
+      fileList.forEach((file, index) => {
+         let reader = new FileReader();
+         reader.onload = (e) => {
+            file['base64'] = e.target.result;
+         }
+         reader.readAsDataURL(file.originFileObj);
+      })
+
+      // const lastOfFileList = fileList.slice(-1)[0];
+      setLoadingImage(fileList[0].base64)
       percentStatus();
    };
+
+   if (loadingImage) {
+      console.log(loadingImage)
+   }
 
    const percentStatus = () => {
       setTimeout(() => {
@@ -55,17 +58,17 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
          movie_title: values.original_title,
          movie_data: loadingImage
       }
-      helpers.addMovies(params);
+
+      helpers.addUserMovie(params);
       setReady(true);
    };
    
    const goHome = () => {
       setLoadingImage();
       form.resetFields();
-      setRefresh(Math.random().toString('26'));
       closeModal();
+      setRefresh(Math.random().toString('26'));
    };
-
 
    return (
       <Modal
@@ -122,7 +125,7 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                               </Upload.Dragger>
                            </Form.Item>
                               {
-                                 loadingImage ?
+                                 loadingImage &&
                                  <Row justify="center" className="progress-bar-wrapper">
                                     <Col lg={24}>
                                        <Row justify="start">
@@ -184,8 +187,6 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                                        </Row>
                                     </Col>
                                  </Row>
-                                 :
-                                 null
                               }
                         </Row>
                         <Row justify="center" style={{ marginTop: 48 }}>

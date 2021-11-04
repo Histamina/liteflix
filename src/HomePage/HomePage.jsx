@@ -12,10 +12,6 @@ const HomePage = () => {
    const [featuredLiteflix, setFeaturedLiteflix] = useState();
    const [popularMovies, setPopularMovies] = useState();
    const [isModalVisible, setIsModalVisible] = useState(false);
-   const [userMovies, setUserMovies] = useState(
-      JSON.parse(localStorage.getItem("userMovies")) !== null ?
-      JSON.parse(localStorage.getItem("userMovies")) : null
-   );
    const [refresh, setRefresh] = useState();
 
    const fetchFeatured = async () => {
@@ -34,18 +30,9 @@ const HomePage = () => {
       setLoading(false);
    };
 
-   const checkMovies = (data) => {
-      helpers.addMovies(data)
-   };
-
-   if (userMovies) {
-      console.log(userMovies)
-   }
-
    useEffect(() => {
       fetchFeatured();
       fetchPopularMovies();
-      checkMovies(userMovies)
    }, [refresh]);
 
    const showModal = () => {
@@ -56,9 +43,6 @@ const HomePage = () => {
       setIsModalVisible(false);
    };
 
-   if(popularMovies){
-      console.log(popularMovies)
-   }
 
    return (
       <Row justify="center">
@@ -74,6 +58,7 @@ const HomePage = () => {
                         backgroundImage: `url('https://image.tmdb.org/t/p/original${featuredLiteflix.backdrop_path}')`,
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
                         height: '140vh',
                         width: '100vw',
                         position: 'relative',

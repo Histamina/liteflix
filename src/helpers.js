@@ -1,7 +1,7 @@
-const addMovies = (data) => {
-   localStorage.setItem("userMovies", JSON.stringify(data));
+const addUserMovie = (data) => {
+   localStorage.setItem("userMovie", JSON.stringify(data));
 };
 
 export default {
-   addMovies
+   addUserMovie
 };
