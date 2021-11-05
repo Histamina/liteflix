@@ -9,17 +9,24 @@ const { Header } = Layout;
 const Navbar = ({ showModal }) => {
    return (
       <Header className="header-wrapper">
-         <Link to='/'>
-            <div className="logo-wrapper">
+         <Link to='/' className="logo-wrapper">
+            <div>
                <img src={LiteflixLogo} width="153" height="34" alt="Liteflix logo" />
             </div>
          </Link>
-         <Button onClick={showModal} type="primary" size="large">
+         <Button className="desktop-button" onClick={showModal} type="primary" size="large">
             <img src={IconPlus} width="14" height="14" alt="Icon plus logo" />
             Agregar película
          </Button>
+         <Button className="mobile-button" onClick={showModal} type="primary" size="large">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <rect x="0.5" y="0.5" width="29" height="29" rx="14.5" stroke="white"/>
+               <path d="M15.5 9V22" stroke="white" strokeLinecap="square"/>
+               <path d="M22 15.5L9 15.5" stroke="white" strokeLinecap="square"/>
+            </svg>
+         </Button>
          <Menu>
-            <Menu.Item key="1">
+            <Menu.Item key="1" className="menu-wrapper">
                <svg width="27" height="14" viewBox="0 0 27 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0 1H27" stroke="white"/>
                   <path d="M0 7H27" stroke="white"/>

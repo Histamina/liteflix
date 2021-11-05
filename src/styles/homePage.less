@@ -376,9 +376,111 @@
 
 @media screen and (max-width: 991px) {
    .main-wrapper {
+      width: 100%;
+      top: 30vh;
       &__about-movie {
-         h1, h2 {
+         z-index: 20;
+         h1 {
             text-align: center;
+            margin-bottom: 0;
+         }
+         h2 {
+            text-align: center;
+            font-size: 76px;
+            line-height: 77px;
+         }
+         .about-movie__buttons {
+            background: rgb(36,36,36);
+            background: linear-gradient(0deg, rgba(36,36,36,1) 0%, rgba(45,45,45,1) 55%, rgba(255,255,255,0) 100%);
+            padding-bottom: 64px;
+            margin-bottom: 0;
+            & > div {
+               display: flex;
+               justify-content: center;
+               & > div {
+                  margin-bottom: 16px;
+               }
+            }
+         }
+      }
+
+      &__movie-sider {
+         z-index: 1;
+         padding-top: 50px;
+         padding-bottom: 80px;
+         margin-top: -10px;
+         background-color: @black-color;
+         .movie-sider__title {
+            margin-bottom: 27px;
+         }
+         .movie-sider__content {
+            .ant-card.popular-card {
+               height: 194px;
+               border: 1px solid @black-color;
+               .ant-card-body {
+                  & > div {
+                     width: 327px !important;
+                     height: 194px !important;
+                  }
+
+                  .card-content {
+                     .info-wrapper, .info-wrapper-hover {
+                        &__icon, &__title {
+                           p {
+                              margin-bottom: 16px;
+                           }
+                           svg {
+                              width: 48px;
+                              height: 48px;
+                           }
+                        }
+                     }
+                     
+                  }
+
+                  .card-content-show {
+                     & > div {
+                        width: 100%;
+                     }
+                     .info-wrapper, .info-wrapper-hover {
+                        p {
+                           margin-bottom: 5px;
+                           word-wrap: break-word;
+                           text-align: left;
+                           width: 100%;
+                           margin-left: 20px;
+                        }
+                        &__icon {
+                           height: 70%;
+                           svg {
+                              margin-right: 20px;
+                           }
+                        }
+                         
+                        &__title {
+                           height: 30%;
+                           p {
+                              margin-left: 0;
+                              font-size: 14px;
+                           }
+                           svg {
+                              width: 24px;
+                              height: 24px;
+                              margin-right: 10px;
+                              &.play-icon {
+                                 width: inherit;
+                                 height: inherit;
+                              }
+                              &.star-icon {
+                                 width: 12px;
+                                 height: 12px;
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
          }
       }
    }
