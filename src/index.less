@@ -1,6 +1,5 @@
 @import '~antd/lib/style/themes/default.less';
 @import '~antd/dist/antd.less';
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import './styles/navbar.less';
 @import './styles/homePage.less';
 @import './styles/helpers.less';
@@ -10,7 +9,8 @@
 @black-color: #242424;
 @gray-color: rgba(255, 255, 255, 1);
 @error-color: rgba(255, 0, 0, 1);
-@primary-text: 'Bebas Neue', normal;
+@primary-text: 'BebasNeueLight';
+@secondary-text: 'BebasNeueRegular';
 
 body {
    margin: 0;
@@ -29,3 +29,22 @@ code {
       monospace;
 }
 
+@font-face {
+   font-family: 'BebasNeueLight';
+   src: url('./fonts/BebasNeuePro-Light.woff') format('woff');
+   font-weight: 400;
+}
+
+@font-face {
+   font-family: 'BebasNeueRegular';
+   src: url('./fonts/BebasNeuePro-Regular.woff') format('woff');
+   font-weight: 400;
+}
+
+.ant-btn {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-family: @secondary-text;
+   text-transform: uppercase;
+}
