@@ -158,11 +158,13 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                                        </Row>
                                     </Col>
                                     <Col lg={24} md={24} sm={24} xs={24}>
-                                       <Progress
-                                          percent={percentValue}
-                                          showInfo={false}
-                                          className={!randomUpdateStatus && 'error-bar'}
-                                       />
+                                       <div className="gray-progress-bar">
+                                          <Progress
+                                             percent={percentValue}
+                                             showInfo={false}
+                                             className={!randomUpdateStatus && 'error-bar'}
+                                          />
+                                       </div>
                                     </Col>
                                     <Col lg={24} md={24} sm={24} xs={24}>
                                        <Row justify="end">
