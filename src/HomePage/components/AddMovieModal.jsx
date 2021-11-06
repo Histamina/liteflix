@@ -77,7 +77,6 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
          onCancel={closeModal}
          centered={true}
          footer={false}
-         width={730}
          closable={false}
          className="add-movie-modal"
       >
@@ -96,7 +95,9 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                !ready ?
                <Fragment>
                   <Col lg={24} xs={24} className="navbar-mobile-wrapper">
-                     <Navbar />
+                     <Row justify="end">
+                        <Navbar />
+                     </Row>
                   </Col>
                   <Col lg={10} xs={24} className="title-wrapper" >
                      <h2>Agregar película</h2>
@@ -134,7 +135,7 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                               {
                                  loadingImage &&
                                  <Row justify="center" className="progress-bar-wrapper">
-                                    <Col lg={24}>
+                                    <Col lg={24} md={24} sm={24} xs={24}>
                                        <Row justify="start">
                                           {
                                              percentValue < 100 &&
@@ -156,14 +157,14 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                                           }
                                        </Row>
                                     </Col>
-                                    <Col lg={24}>
+                                    <Col lg={24} md={24} sm={24} xs={24}>
                                        <Progress
                                           percent={percentValue}
                                           showInfo={false}
                                           className={!randomUpdateStatus && 'error-bar'}
                                        />
                                     </Col>
-                                    <Col lg={24}>
+                                    <Col lg={24} md={24} sm={24} xs={24}>
                                        <Row justify="end">
                                        {
                                           percentValue < 100 &&
@@ -227,21 +228,36 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                         </Row>
                      </Form>
                   </Col>
+                  <Col xs={18} className="close-modal-mobile mb-40">
+                     <Button
+                        onClick={closeModal}
+                        type="primary"
+                        size="large"
+                        block
+                     >
+                        Salir
+                     </Button>
+                  </Col>
                </Fragment>
                :
                <Fragment>
-                  <Col lg={24} className="upload-success-wrapper">
+                  <Col lg={24} xs={24} className="upload-success-wrapper">
                      <Row justify="center" gutter={[0, 24]}>
-                        <Col lg={24}>
+                        <Col lg={24} xs={24} className="navbar-mobile-wrapper">
+                           <Row justify="end">
+                              <Navbar />
+                           </Row>
+                        </Col>
+                        <Col lg={24} xs={24}>
                            <h3><strong>Lite</strong>flix</h3>
                         </Col>            
-                        <Col lg={24}>
+                        <Col lg={24} xs={24}>
                            <p><strong>¡Felicitaciones!</strong></p>
                         </Col>            
-                        <Col lg={24}>
+                        <Col lg={24} xs={24}>
                            <p className="movie-title">{movieTitle} fue correctamente subida.</p>
                         </Col>            
-                        <Col lg={8}>
+                        <Col lg={8} xs={18}>
                            <Button
                               type="primary"
                               onClick={goHome}
