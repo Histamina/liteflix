@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { Row, Col, Dropdown, Card } from 'antd';
-import helpers from '../../helpers';
+import { helpers } from '../../helpers';
 
 const MovieSider = ({ popularMovies }) => {
    const [dropDownSelected, setDropDownSelected] = useState(1);
@@ -31,13 +31,6 @@ const MovieSider = ({ popularMovies }) => {
       }
    }, []);
 
-   if (popularMovies) {
-      console.log(popularMovies)
-   }
-
-   if (userMovies) {
-      console.log(userMovies)
-   }
 
    const contentClassName = (index) => {
       if (index === hoverIndex || hoverIndex === null) {
@@ -100,9 +93,6 @@ const MovieSider = ({ popularMovies }) => {
       </Row>
    );
 
-   if (userMovie) {
-      console.log(userMovie)
-   }
 
    return (
       <Col lg={5} sm={24} className="main-wrapper__movie-sider">
@@ -223,7 +213,7 @@ const MovieSider = ({ popularMovies }) => {
                         )
                      })
                      :
-                     (userMovies !== null || userMovies )&&
+                     (userMovies !== null && userMovies) &&
                         userMovies.map((movie, index) => {
                            return (
                               <Col key={index}>

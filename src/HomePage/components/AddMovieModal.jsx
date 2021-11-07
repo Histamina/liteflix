@@ -1,9 +1,7 @@
 import { Fragment, useState } from 'react';
 import { Row, Col, Form, Button, Modal, Input, Upload, Progress } from 'antd';
-import helpers from '../../helpers';
+import { helpers } from '../../helpers';
 import Navbar from '../../components/Navbar';
-
-const { Dragger } = Upload;
 
 const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
    const [loadingImage, setLoadingImage] = useState();
@@ -19,19 +17,14 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
       fileList.forEach((file, index) => {
          let reader = new FileReader();
          reader.onload = (e) => {
+            setLoadingImage(e.target.result);
             file['base64'] = e.target.result;
          }
          reader.readAsDataURL(file.originFileObj);
       })
 
-      // const lastOfFileList = fileList.slice(-1)[0];
-      setLoadingImage(fileList[0].base64)
       percentStatus();
    };
-
-   if (loadingImage) {
-      console.log(loadingImage)
-   }
 
    const percentStatus = () => {
       setTimeout(() => {
@@ -54,6 +47,7 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
       setMovieTitle(event.target.value);
    };
 
+ 
    const onFinish = async (values) => {
       const params = {
          movie_title: values.original_title,
@@ -114,7 +108,7 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                               <Upload.Dragger
                                  name="files"
                                  style={{ display: `${!loadingImage ? 'flex' : 'none' }`}}
-                                 customRequest={() => console.log('todo ok')}
+                                 customRequest={console.log('status: ok')}
                               >
                                  <Row justify="center">
                                     <Col>
@@ -160,6 +154,7 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                                     <Col lg={24} md={24} sm={24} xs={24}>
                                        <div className="gray-progress-bar">
                                           <Progress
+                                             style={{ width: `${percentValue}`}}
                                              percent={percentValue}
                                              showInfo={false}
                                              className={!randomUpdateStatus && 'error-bar'}
@@ -220,9 +215,9 @@ const AddMovieModal = ({ isModalVisible, closeModal, setRefresh }) => {
                                  type="primary"
                                  block
                                  disabled={
-                                    !movieTitle || !loadingImage || !randomUpdateStatus
+                                    (!movieTitle || !loadingImage || !randomUpdateStatus)
                                  }
-                                 className={`${!movieTitle || !loadingImage || !randomUpdateStatus && 'disabled-button'}`}
+                                 className={`${(!movieTitle || !loadingImage || !randomUpdateStatus) && 'disabled-button'}`}
                               >
                                  Subir película
                               </Button>

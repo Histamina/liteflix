@@ -41,7 +41,7 @@ const Navbar = ({ showModal }) => {
                </svg>
             </Menu.Item>
             <Menu.Item key="3">
-               <img src={ProfilePicture} />
+               <img src={ProfilePicture} alt="Profile icon" />
             </Menu.Item>
          </Menu>
       </Header>

@@ -3,9 +3,8 @@ import { Row, Col, Spin } from 'antd';
 import Navbar from '../components/Navbar';
 import AboutMovie from './components/AboutMovie';
 import MovieSider from './components/MovieSider';
-import homeService from '../services/homeService';
 import AddMovieModal from './components/AddMovieModal';
-import helpers from '../helpers';
+import { homeService } from '../services/homeService';
 
 const HomePage = () => {
    const [loading, setLoading] = useState(false);

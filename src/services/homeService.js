@@ -24,7 +24,7 @@ const getPopularMovies = async () => {
    return dataResponse;
 };
 
-export default {
+export const homeService = {
    getFeaturedLiteflix,
    getPopularMovies
 };
