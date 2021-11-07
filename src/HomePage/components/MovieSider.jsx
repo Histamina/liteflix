@@ -169,7 +169,7 @@ const MovieSider = ({ popularMovies }) => {
                                     onMouseOver={() => setHoverIndex(index)}
                                     onMouseLeave={() => setHoverIndex()}
                                  >
-                                    <Col lg={24} style={{ backgroundColor: 'rgba(36, 36, 36, 0.7)'}}>
+                                    <Col lg={24} className="gray-background">
                                        <Row justify="center" className="info-wrapper">
                                           <Col lg={24} md={24} sm={24} xs={24} className="info-wrapper__icon">
                                              <Row justify="start" style={{ width: '100%' }}>
@@ -234,7 +234,7 @@ const MovieSider = ({ popularMovies }) => {
                                                    <circle cx="20" cy="20" r="19.5" stroke="white"/>
                                                    <path fillRule="evenodd" clipRule="evenodd" d="M26.6484 20.2701L16 13V27L26.6484 20.2701Z" stroke="white"/>
                                                 </svg>
-                                             </Col>
+                                             </Col> 
                                              <Col lg={24} xs={24} className="info-wrapper__title">
                                                 <p>{movie.movie_title}</p>
                                              </Col>

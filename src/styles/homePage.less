@@ -1,3 +1,12 @@
+@keyframes slideInFromLeft {
+   0% {
+     transform: translateX(-100%);
+   }
+   100% {
+     transform: translateX(0);
+   }
+}
+
 .main-wrapper {
    width: 90vw;
    position: absolute;
@@ -21,13 +30,14 @@
       }
       h2 {
          font-family: @secondary-text;
-         text-transform: uppercase;
          font-size: 120px;
+         font-weight: 700;
          line-height: 100px;
          letter-spacing: 16px;
-         font-weight: 700;
+         text-transform: uppercase;
          color: @primary-color;
          margin-bottom: 8px;
+         animation: 1s ease-out 0s 1 slideInFromLeft;
       }
    
       .about-movie__buttons {
@@ -100,6 +110,7 @@
                   .info-wrapper {
                      height: 100%;
                      padding: 16px;
+                     transition: all 0.5s ease-in-out;
 
                      &:hover {
                         background-color: rgba(36, 36, 36, 0.7);
@@ -140,7 +151,13 @@
                }
 
                .card-content, .card-content-show {
-                  .info-wrapper, .info-wrapper-hover {
+                  .gray-background {
+                     transition: all 0.5s ease-in-out;
+                     &:hover {
+                        background-color: rgba(36, 36, 36, 0.7);
+                     }
+                  }
+                  .info-wrapper {
                      height: 100%;
                      padding: 16px;
                      p {
@@ -153,6 +170,7 @@
                         color: @white-color;
                         font-weight: 400;
                      }
+                     transition: all 0.5s ease-in-out;
                      &__icon, &__title {
                         display: flex;
                         justify-content: center;
@@ -575,7 +593,7 @@
                   }
 
                   .card-content {
-                     .info-wrapper, .info-wrapper-hover {
+                     .info-wrapper {
                         &__icon, &__title {
                            p {
                               margin-bottom: 16px;
@@ -590,43 +608,47 @@
                   }
 
                   .card-content-show {
-                     & > div {
+                     .gray-background {
                         width: 100%;
-                     }
-                     .info-wrapper, .info-wrapper-hover {
-                        p {
-                           margin-bottom: 5px;
-                           word-wrap: break-word;
-                           text-align: left;
-                           width: 100%;
-                           margin-left: 20px;
-                        }
-                        &__icon {
-                           height: 70%;
-                           svg {
-                              margin-right: 20px;
-                           }
-                        }
-                         
-                        &__title {
-                           height: 30%;
+                        transition: all 0.5s ease-in-out;
+                        .info-wrapper {
+                           background-color: rgba(36, 36, 36, 0.7);
+
                            p {
-                              margin-left: 0;
-                              font-size: 14px;
+                              margin-bottom: 5px;
+                              word-wrap: break-word;
+                              text-align: left;
+                              width: 100%;
+                              margin-left: 20px;
                            }
-                           svg {
-                              width: 24px;
-                              height: 24px;
-                              margin-right: 10px;
-                              &.play-icon {
-                                 width: inherit;
-                                 height: inherit;
-                              }
-                              &.star-icon {
-                                 width: 12px;
-                                 height: 12px;
+                           &__icon {
+                              height: 70%;
+                              svg {
+                                 margin-right: 20px;
                               }
                            }
+                            
+                           &__title {
+                              height: 30%;
+                              p {
+                                 margin-left: 0;
+                                 font-size: 14px;
+                              }
+                              svg {
+                                 width: 24px;
+                                 height: 24px;
+                                 margin-right: 10px;
+                                 &.play-icon {
+                                    width: inherit;
+                                    height: inherit;
+                                 }
+                                 &.star-icon {
+                                    width: 12px;
+                                    height: 12px;
+                                 }
+                              }
+                           }
+                           transition: all 0.5s ease-in-out;
                         }
                      }
                   }

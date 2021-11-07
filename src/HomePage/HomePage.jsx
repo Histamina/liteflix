@@ -62,7 +62,7 @@ const HomePage = () => {
                         width: '100vw',
                         position: 'relative',
                         display: 'flex',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
                      }}
                   >
                      <Navbar showModal={showModal} />
