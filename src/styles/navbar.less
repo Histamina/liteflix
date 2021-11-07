@@ -1,0 +1,110 @@
+.ant-layout-header.header-wrapper {
+   background: transparent;
+   position: absolute;
+   top: 20px;
+   width: 90vw;
+   padding-left: 0;
+   padding-right: 0;
+   display: flex;
+   align-items: center;
+
+   .logo-wrapper {
+      display: flex;
+      align-items: center;
+      margin-right: 64px;
+      order: 1;
+   }
+
+   .ant-btn-primary.desktop-button {
+      img {
+         margin-right: 12px;
+      }
+      font-family: @secondary-text;
+      text-transform: uppercase;
+      border: none;
+      background: transparent;
+      font-size: 18px;
+      line-height: 18px;
+      letter-spacing: 4px;
+      font-weight: bold;
+      box-shadow: none;
+      order: 2;
+   }
+
+   .ant-menu {
+      width: 100%;
+      float: right;
+      background: transparent;
+      border: none;
+      display: flex;
+      justify-content: flex-end;
+      order: 3;
+
+      &:not(.ant-menu-horizontal) .ant-menu-item-selected {
+         background: transparent;
+      }
+      .ant-menu-item {
+         margin-left: 15px;
+         &.bell-wrapper {
+            margin-top: 10px;
+         }
+      }
+   }
+}
+
+@media screen and (max-width: 991px) {
+   .ant-layout-header.header-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 85vw;
+
+      .logo-wrapper {
+         display: flex;
+         align-items: center;
+         order: 2;
+         margin-right: 0;
+         img {
+            width: 105px;
+            height: 25px;
+         }
+      }
+      .ant-btn-primary.desktop-button {
+         display: none;
+      }
+
+      .ant-btn-primary.mobile-button {
+         border: none;
+         background: transparent;
+         font-size: 18px;
+         line-height: 18px;
+         letter-spacing: 4px;
+         font-weight: bold;
+         box-shadow: none;
+         padding: 0;
+         order: 1;
+         svg {
+            width: 36px;
+            height: 36px;
+         }
+      }
+
+      .ant-menu {
+         width: auto;
+         order: 3;
+         .menu-wrapper, .bell-wrapper {
+            display: none;
+         }
+         & .ant-menu-item {
+            margin-left: 0;
+            padding: 0;
+         }
+      }
+   }
+}
+
+@media screen and (min-width: 992px) {
+   .ant-btn-primary.mobile-button {
+      display: none;
+   }
+}
