@@ -14,22 +14,19 @@ const MovieSider = ({ popularMovies }) => {
    const checkIfUserMovie = (data) => {
       helpers.addUserMovie(data);
    };
-
-   useEffect (() => {
-      checkIfUserMovie(userMovie);
-   }, []);
-
+  
    const selectDropDownValue = (value) => {
       setDropDownSelected(value);
    };
-
+   
    useEffect(() => {
+      checkIfUserMovie(userMovie);
       if (userMovie) {
          let array = [];
          array.push(userMovie);
          setUserMovies(array);
       }
-   }, []);
+   }, [userMovie]);
 
 
    const contentClassName = (index) => {
