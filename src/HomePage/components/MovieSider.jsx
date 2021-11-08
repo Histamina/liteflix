@@ -6,6 +6,7 @@ const MovieSider = ({ popularMovies }) => {
    const [dropDownSelected, setDropDownSelected] = useState(1);
    const [userMovies, setUserMovies] = useState();
    const [hoverIndex, setHoverIndex] = useState();
+   // eslint-disable-next-line no-unused-vars
    const [userMovie, setUserMovie] = useState(
       JSON.parse(localStorage.getItem("userMovie")) !== null ?
       JSON.parse(localStorage.getItem("userMovie")) : null
